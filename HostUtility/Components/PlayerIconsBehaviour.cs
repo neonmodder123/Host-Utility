@@ -52,7 +52,17 @@ public class PlayerIconsBehaviour(IntPtr iPtr) : MonoBehaviour(iPtr)
     public void Initialize(PlayerControl owner)
     {
         LevelIcon = Object.Instantiate(HudManager.Instance.MeetingPrefab.PlayerButtonPrefab.LevelNumberText.transform.parent, transform).gameObject;
-        LevelIcon.transform.GetChild(1).GetComponent<TextMeshPro>().text = owner.Data.PlayerLevel.ToString();
+        
+        if (owner.Data.PlayerLevel == 4291967295)
+        {
+            LevelIcon.transform.GetChild(1).GetComponent<TextMeshPro>().text = "Guest";
+            LevelIcon.GetComponent<SpriteRenderer>().color = new Color(0.2f, 0.8f, 0.2f, 1f);
+        }
+        else
+        {
+            LevelIcon.transform.GetChild(1).GetComponent<TextMeshPro>().text = owner.Data.PlayerLevel.ToString();
+        }
+        
         IdIcon = Object.Instantiate(HudManager.Instance.MeetingPrefab.PlayerButtonPrefab.LevelNumberText.transform.parent, transform).gameObject;
         IdIcon.transform.GetChild(1).GetComponent<TextMeshPro>().text = owner.Data.PlayerId.ToString();
         var headerText = IdIcon.transform.GetChild(0);
